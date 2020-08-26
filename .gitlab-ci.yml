@@ -1,0 +1,13 @@
+default:
+  image: cronn/nodejs-chrome-firefox
+
+stages:
+  - build
+
+Build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  tags:
+    - docker-linux-runner
