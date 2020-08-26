@@ -2,11 +2,16 @@
     "env": {
         "browser": true,
         "es2020": true,
-        "node": true
+        "node": true,
+        "jasmine": true
     },
+    "parser": "Babel-ESlint",
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "angular",
+        "plugin:jasmine/recommended"
     ],
+    "plugins": ["angular","jasmine"],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module"
