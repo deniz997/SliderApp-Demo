@@ -7,9 +7,21 @@ export default {
     template: htmlTemplate,
     transclude: true,
     controller:class SliderElementController{
-        constructor(){
+        constructor($interval){
             this.images = [];
             this.currentIndex = 0;
+            this.onAutoplay  = false;
+            this.$interval = $interval;
+            this.autoplayPromise = null;
+        }
+
+        toggleAutoplay(){
+            console.log("Autoplay is: "+ this.onAutoplay.toString());
+            if(this.onAutoplay){
+                this.autoplayPromise = this.$interval(()=>{this.nextSlide()},500);
+            }else{
+                this.$interval.cancel(this.autoplayPromise);
+            }
         }
 
         addSlide(image){
