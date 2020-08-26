@@ -1,12 +1,15 @@
-<div id="slide-container" class="row" ng-app="sliderElement">
+<div id="slide-container" class="row mx-0" ng-app="sliderElement">
     <h2 class="col-12 p-4 text-center">Slide Carousel Example - AngularJS</h2>
     <ng-transclude class="col-12 p-0"></ng-transclude>
     <div id="slide-arrows" class="row w-100 col-12 mx-auto px-0">
         <button class="ml-5 mr-auto bg-transparent border-0" ng-click="$ctrl.previousSlide()">
-            <i class="fas fa-chevron-circle-left text-white h-100 fa-3x rounded-circle"></i>
+            <i class="fas fa-chevron-circle-left text-white fa-3x rounded-circle"></i>
         </button>
         <button class="mr-5 ml-auto bg-transparent border-0" ng-click="$ctrl.nextSlide()">
-            <i class="fas fa-chevron-circle-right text-white h-100 fa-3x rounded-circle"></i>
+            <i class="fas fa-chevron-circle-right text-white fa-3x rounded-circle"></i>
         </button>
+    </div>
+    <div class="col-12 row w-100 justify-content-center mt-2">
+       <h6 class="my-auto">Autoplay</h6><input class="my-auto mx-2" type="checkbox" ng-model="$ctrl.onAutoplay" ng-change="$ctrl.toggleAutoplay()" id="autoplay-checkbox">
     </div>
 </div>
