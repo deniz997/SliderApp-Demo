@@ -6,8 +6,5 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 import './slider/slider-element.module';
-import './slider/slider-element.component';
-import './slider/slider-element.template.html';
-import './slider/slider-element.style.css';
 
-angular.module('sliderDemo',['sliderElement']);
+angular.module('sliderDemo', ['sliderElement']);

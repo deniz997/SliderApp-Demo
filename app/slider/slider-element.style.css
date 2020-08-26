@@ -17,7 +17,7 @@
 }
 
 #slide-arrows button svg{
-    box-shadow: 0px 0px 20px #494a49;
+    box-shadow: 0 0 20px #494a49;
 }
 
 ng-transclude img {
