@@ -1,12 +1,17 @@
 {
   "name": "slider-demo",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
+  "files": [
+    "/dist/bundle.js",
+    "/app/slider"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start karma.conf.js",
     "start": "http-server -a localhost -p 8000 -c-1 app",
-    "build": "webpack-dev-server"
+    "build": "webpack --mode development",
+    "test:single-run": "npm test -- --single-run",
+    "serve": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -48,8 +53,10 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-eslint": "^2.2.0",
     "karma-jasmine": "^4.0.1",
+    "karma-webpack": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "description": ""
 }

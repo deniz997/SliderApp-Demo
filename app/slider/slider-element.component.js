@@ -6,11 +6,11 @@ export default {
   transclude: true,
   controller: class SliderElementController {
     constructor($interval) {
-      this.images = [];
+      this.items = [];
       this.currentIndex = 0;
       this.onAutoplay = false;
       this.$interval = $interval;
-      this.autoplayPromise = null;
+      this.autoplayPromise = undefined;
     }
 
     toggleAutoplay() {
@@ -24,35 +24,37 @@ export default {
       }
     }
 
-    addSlide(image) {
-      if (this.images.length === 0) {
-        image.showImage();
+    addSlide(item) {
+      const slideItem = item;
+      if (this.items.length === 0) {
+        slideItem.visible = true;
       } else {
-        image.hideImage();
+        slideItem.visible = false;
       }
-      this.images.push(image);
-      return this.images.length;
+      slideItem.id = this.items.length;
+      this.items.push(slideItem);
+      return this.items.length;
     }
 
     nextSlide() {
       // console.log('nextSlide() clicked');
-      this.images[this.currentIndex].hideImage();
-      if (this.currentIndex < this.images.length - 1) {
+      this.items[this.currentIndex].visible = false;
+      if (this.currentIndex < this.items.length - 1) {
         this.currentIndex += 1;
       } else {
         this.currentIndex = 0;
       }
-      this.images[this.currentIndex].showImage();
+      this.items[this.currentIndex].visible = true;
     }
 
     previousSlide() {
-      this.images[this.currentIndex].hideImage();
+      this.items[this.currentIndex].visible = false;
       if (this.currentIndex > 0) {
         this.currentIndex -= 1;
       } else {
-        this.currentIndex = this.images.length - 1;
+        this.currentIndex = this.items.length - 1;
       }
-      this.images[this.currentIndex].showImage();
+      this.items[this.currentIndex].visible = true;
     }
   },
 };
