@@ -16,4 +16,5 @@ Build:
 Test:
   stage: test
   script:
+    - npm install
     - npm run test:single-run
