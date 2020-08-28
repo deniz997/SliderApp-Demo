@@ -11,7 +11,8 @@
     "start": "http-server -a localhost -p 8000 -c-1 app",
     "build": "webpack --mode development",
     "test:single-run": "npm test -- --single-run",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
     "karma-eslint": "^2.2.0",
     "karma-jasmine": "^4.0.1",
     "karma-webpack": "^4.0.2",
+    "protractor": "^7.0.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
