@@ -1,71 +1,147 @@
 import './slider-element.module';
 
-describe('Slider Element Module Test', () => {
+describe('Slider Element Controller Test', () => {
   beforeEach(() => {
     angular.mock.module('sliderElement');
+    angular.mock.inject(
+      ($componentController) => {
+        sliderCtrl = $componentController('sliderElement');
+      },
+    );
   });
 
-  describe('Slider Element Controller Unit Tests', () => {
-    let sliderCtrl;
+  let sliderCtrl;
 
-    beforeEach(() => {
-      angular.mock.inject(
-        ($componentController) => {
-          sliderCtrl = $componentController('sliderElement');
-        },
-      );
-    });
+  beforeEach(() => {
+    const item = {
+      id: 0,
+      visible: false,
+    };
+    sliderCtrl.addSlide(item);
+    sliderCtrl.addSlide(item);
+    sliderCtrl.addSlide(item);
+  });
 
-    beforeEach(() => {
-      const item = { id: 0, visible: false };
-      sliderCtrl.addSlide(item);
-      sliderCtrl.addSlide(item);
-      sliderCtrl.addSlide(item);
-    });
+  it('should be initialized correctly', () => {
+    expect(sliderCtrl.items)
+      .toBeDefined();
 
-    it('should be initialized correctly', () => {
-      expect(sliderCtrl.items).toBeDefined();
-      expect(sliderCtrl.currentIndex).toBe(0);
-      expect(sliderCtrl.onAutoplay).toBe(false);
-      expect(sliderCtrl.autoplayPromise).toBeUndefined();
-    });
+    expect(sliderCtrl.currentIndex)
+      .toBe(0);
 
-    it('should add slides properly', () => {
-      const item = { id: 0, visible: false };
+    expect(sliderCtrl.onAutoplay)
+      .toBeFalse();
 
-      expect(sliderCtrl.items.length).toBe(3);
-      sliderCtrl.addSlide(item);
+    expect(sliderCtrl.autoplayPromise)
+      .toBeUndefined();
+  });
 
-      expect(sliderCtrl.items.length).toBe(4);
-      sliderCtrl.addSlide(item);
+  it('should add slides properly', () => {
+    const item = {
+      id: 0,
+      visible: false,
+    };
 
-      expect(sliderCtrl.items.length).toBe(5);
-    });
+    expect(sliderCtrl.items.length)
+      .toBe(3);
+    sliderCtrl.addSlide(item);
 
-    it('should get the next slide properly', () => {
-      expect(sliderCtrl.currentIndex).toBe(0);
+    expect(sliderCtrl.items.length)
+      .toBe(4);
+    sliderCtrl.addSlide(item);
+
+    expect(sliderCtrl.items.length)
+      .toBe(5);
+  });
+
+  it('should get the next slide properly', () => {
+    expect(sliderCtrl.currentIndex)
+      .toBe(0);
+    sliderCtrl.nextSlide();
+
+    expect(sliderCtrl.currentIndex)
+      .toBe(1);
+    sliderCtrl.nextSlide();
+
+    expect(sliderCtrl.currentIndex)
+      .toBe(2);
+  });
+
+  it('should not let the currentIndex to exceed items.length', () => {
+    for (let i = 0; i < sliderCtrl.items.length; i += 1) {
       sliderCtrl.nextSlide();
+    }
 
-      expect(sliderCtrl.currentIndex).toBe(1);
-      sliderCtrl.nextSlide();
+    expect(sliderCtrl.currentIndex)
+      .toBe(0);
+  });
 
-      expect(sliderCtrl.currentIndex).toBe(2);
+  it('should get the previous slide properly', () => {
+    expect(sliderCtrl.currentIndex)
+      .toBe(0); // 2
+    sliderCtrl.previousSlide();
+
+    expect(sliderCtrl.currentIndex)
+      .toBe(sliderCtrl.items.length - 1); // 1
+    sliderCtrl.previousSlide();
+  });
+});
+
+describe('Slider Element Component Unit Tests', () => {
+  let scope;
+  let compile;
+  let element;
+
+  beforeEach(() => {
+    angular.mock.module('sliderElement');
+    angular.mock.inject(($rootScope, $compile) => {
+      scope = $rootScope.$new();
+      compile = $compile;
     });
 
-    it('should not let the currentIndex to exceed items.length', () => {
-      for (let i = 0; i < sliderCtrl.items.length; i += 1) {
-        sliderCtrl.nextSlide();
-      }
+    element = angular.element('<slider-element>'
+      + '<slide-item>Test String</slide-item>'
+      + '<slide-item>Test String</slide-item>'
+      + '<slide-item>Test String</slide-item>'
+      + '</slider-element>');
+    element = compile(element)(scope);
+    scope.$digest();
+  });
 
-      expect(sliderCtrl.currentIndex).toBe(0);
-    });
+  it('should contain slide element components', () => {
+    expect(element.html())
+      .toContain('Test String');
+  });
 
-    it('should get the previous slide properly', () => {
-      expect(sliderCtrl.currentIndex).toBe(0); // 2
-      sliderCtrl.previousSlide();
+  it('should contain all slide items', () => {
+    const slideItems = element.find('slide-item');
 
-      expect(sliderCtrl.currentIndex).toBe(sliderCtrl.items.length - 1); // 1
-      sliderCtrl.previousSlide();
-    });
+    expect(slideItems.length).toBe(3);
+  });
+
+  it('should contain only one element as visible', () => {
+    const hiddenItems = element[0].querySelectorAll('.ng-hide');
+
+    expect(hiddenItems.length).toBe(2);
+  });
+
+  it('should contain only one element after next or previous slide function', () => {
+    let hiddenItems = element[0].querySelectorAll('.ng-hide');
+
+    expect(hiddenItems.length).toBe(2);
+
+    element[0].querySelector("[id='prev-arrow']").click();
+    scope.$digest();
+    hiddenItems = element[0].querySelectorAll('.ng-hide');
+
+    expect(hiddenItems.length).toBe(2);
+  });
+
+  it('should let the count of slide components match with the items array in controller', () => {
+    const numOfItems = element.find('slide-item');
+    const controller = element.controller('sliderElement');
+
+    expect(numOfItems.length).toBe(3);
+    expect(controller.items.length).toBe(numOfItems.length);
   });
 });

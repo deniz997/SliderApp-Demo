@@ -3,7 +3,6 @@ default:
 
 stages:
   - build
-  - test
 
 Build:
   stage: build
@@ -12,8 +11,3 @@ Build:
     - npm run build
   tags:
     - docker-linux-runner
-
-Test:
-  stage: test
-  script:
-    - npm run test:single-run
