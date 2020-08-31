@@ -37,7 +37,7 @@ exports.config = {
   beforeLaunch: () => {
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(compiler, {
-      contentBase: path.resolve(__dirname, './'),
+      contentBase: path.resolve(__dirname, '../app'),
       publicPath: '',
       compress: true,
       watchContentBase: true,
