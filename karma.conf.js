@@ -4,22 +4,18 @@ const webpackConfig = require('./webpack.config');
 module.exports = function (config) {
   config.set({
 
-    basePath: './',
-    exclude: [
-      '/app/**/*.',
-    ],
-
     files: [
       './node_modules/angular/angular.js',
       './node_modules/angular-mocks/angular-mocks.js',
-      { pattern: './app/**/*.spec.js' },
+      { pattern: './app/slider/*.spec.js' },
     ],
 
     webpack: webpackConfig,
     preprocessors: {
-      'app/slider/*.spec.js': ['webpack'],
+      'app/slider/*.spec.js': ['webpack', 'coverage'],
     },
-    autoWatch: true,
+
+    reporters: ['progress', 'coverage'],
 
     frameworks: ['jasmine'],
 
@@ -37,11 +33,15 @@ module.exports = function (config) {
         ],
       },
     },
-
+    coverageReporter: {
+      reporters: [{ type: 'html', subdir: 'html' }, { type: 'text-summary' }],
+      dir: 'coverage/',
+    },
     plugins: [
       'karma-chrome-launcher',
       'karma-jasmine',
       'karma-webpack',
+      'karma-coverage',
     ],
 
   });

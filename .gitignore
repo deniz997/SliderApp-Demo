@@ -34,3 +34,14 @@ e2e/*.map
 .DS_Store/
 
 # End of https://www.toptal.com/developers/gitignore/api/angular
+/coverage/html/favicon.png
+/coverage/html/base.css
+/coverage/html/block-navigation.js
+/coverage/html/slider-element.module.spec.js.html
+/coverage/html/prettify.css
+/coverage/html/index.html
+/coverage/html/prettify.js
+/coverage/html/sort-arrow-sprite.png
+/coverage/html/sorter.js
+/coverage/html/
+/coverage/
