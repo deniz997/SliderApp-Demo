@@ -22,6 +22,8 @@ Test:
 
 E2e:
   stage: e2e
+  before_script:
+    - apt-get -y install openjdk-8-jre
   script:
     - npm install
     - npm run protractor
