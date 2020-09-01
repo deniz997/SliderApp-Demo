@@ -4,6 +4,7 @@ default:
 stages:
   - build
   - test
+  - e2e
 
 Build:
   stage: build
@@ -18,3 +19,9 @@ Test:
   script:
     - npm install
     - npm run test:single-run
+
+E2e:
+  stage: e2e
+  script:
+    - npm install
+    - npm run protractor

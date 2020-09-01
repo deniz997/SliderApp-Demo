@@ -69,27 +69,53 @@ describe('Slider App', () => {
   it('should enable and disable the autoplay', () => {
     autoplayCheckbox = element(by.id('autoplay-checkbox'));
 
-    expect(autoplayCheckbox.hasClass('ng-empty')).toBe(true);
-    expect(autoplayCheckbox.hasClass('ng-not-empty')).toBe(false);
+    expect(autoplayCheckbox.getAttribute('class')).toContain('ng-empty');
     autoplayCheckbox.click();
 
-    expect(autoplayCheckbox.hasClass('ng-empty')).toBe(false);
-    expect(autoplayCheckbox.hasClass('ng-not-empty')).toBe(true);
+    expect(autoplayCheckbox.getAttribute('class')).toContain('ng-not-empty');
     autoplayCheckbox.click();
 
-    expect(autoplayCheckbox.hasClass('ng-empty')).toBe(true);
-    expect(autoplayCheckbox.hasClass('ng-not-empty')).toBe(false);
+    expect(autoplayCheckbox.getAttribute('class')).toContain('ng-empty');
   });
 
-  // it('should enable autoplay and change the item after a spesific time interval', () => {
-  //   expect(items.get(0).element(by.css('div')).isDisplayed()).toBe(true);
-  //   expect(items.get(1).element(by.css('div')).isDisplayed()).toBe(false);
-  //   expect(items.get(2).element(by.css('div')).isDisplayed()).toBe(false);
-  //   const wait = browser.sleep(750);
-  //   autoplayCheckbox.click().then(wait).then(autoplayCheckbox.click());
-  //
-  //   expect(items.get(0).element(by.css('div')).isDisplayed()).toBe(false);
-  //   expect(items.get(1).element(by.css('div')).isDisplayed()).toBe(true);
-  //   expect(items.get(2).element(by.css('div')).isDisplayed()).toBe(false);
-  // });
+  describe('Test for Autoplay', () => {
+    let EC;
+    let oldInvisible;
+    let newVisible;
+    let visibilityCorrect;
+
+    beforeEach(() => {
+      EC = protractor.ExpectedConditions;
+      oldInvisible = EC.invisibilityOf(items.get(0).element(by.css('div')));
+      newVisible = EC.visibilityOf(items.get(1).element(by.css('div')));
+      visibilityCorrect = EC.and(oldInvisible, newVisible);
+
+      expect(items.get(0).element(by.css('div')).isDisplayed()).toBe(true);
+      expect(items.get(1).element(by.css('div')).isDisplayed()).toBe(false);
+      expect(items.get(2).element(by.css('div')).isDisplayed()).toBe(false);
+
+      autoplayCheckbox.click();
+      browser.wait(visibilityCorrect, 750);
+      autoplayCheckbox.click();
+    });
+
+    it('should enable autoplay and get second item after in a specific time interval', () => {
+      expect(items.get(0).element(by.css('div')).isDisplayed()).toBe(false);
+      expect(items.get(1).element(by.css('div')).isDisplayed()).toBe(true);
+      expect(items.get(2).element(by.css('div')).isDisplayed()).toBe(false);
+    });
+
+    it('should let autoplay for two slides', () => {
+      oldInvisible = EC.invisibilityOf(items.get(1).element(by.css('div')));
+      newVisible = EC.visibilityOf(items.get(2).element(by.css('div')));
+      visibilityCorrect = EC.and(oldInvisible, newVisible);
+      autoplayCheckbox.click();
+      browser.wait(visibilityCorrect, 750);
+      autoplayCheckbox.click();
+
+      expect(items.get(0).element(by.css('div')).isDisplayed()).toBe(false);
+      expect(items.get(1).element(by.css('div')).isDisplayed()).toBe(false);
+      expect(items.get(2).element(by.css('div')).isDisplayed()).toBe(true);
+    });
+  });
 });
