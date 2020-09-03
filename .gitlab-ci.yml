@@ -1,0 +1,29 @@
+default:
+  image: cronn/nodejs-chrome-firefox
+
+stages:
+  - build
+  - test
+  - e2e
+
+Build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  tags:
+    - docker-linux-runner
+
+Test:
+  stage: test
+  script:
+    - npm install
+    - npm run test:single-run
+
+E2e:
+  stage: e2e
+  before_script:
+    - apt-get -y install openjdk-8-jre
+  script:
+    - npm install
+    - npm run protractor

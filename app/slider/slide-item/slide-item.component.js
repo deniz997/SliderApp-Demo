@@ -10,14 +10,7 @@ export default {
   controller: class SlideItemController {
     constructor() {
       this.visible = false;
-    }
-
-    showImage() {
-      this.visible = true;
-    }
-
-    hideImage() {
-      this.visible = false;
+      this.id = undefined;
     }
 
     $onInit() {

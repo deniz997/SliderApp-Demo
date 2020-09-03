@@ -22,7 +22,7 @@
 
 ng-transclude img {
     height: 500px;
-    width: 100vh;
+    width: 100%;
     object-fit: cover;
 }
 ng-transclude{
