@@ -17,11 +17,10 @@ export default {
       // console.log(`Autoplay is: ${this.onAutoplay.toString()}`);
       if (this.onAutoplay) {
         this.autoplayPromise = this.$interval(
-          this.nextSlide, 500,
+          () => { this.nextSlide(); }, 500,
         );
       } else {
         this.$interval.cancel(this.autoplayPromise);
-        this.autoplayPromise = undefined;
       }
     }
 

@@ -87,15 +87,18 @@ describe('Slider App Unit Test', () => {
       sliderCtrl.previousSlide();
     });
 
+
     describe('Slider Element Component Unit Tests', () => {
       let scope;
       let compile;
       let $element;
+      let interval;
 
       beforeEach(() => {
-        angular.mock.inject(($rootScope, $compile) => {
+        angular.mock.inject(($rootScope, $compile, $interval) => {
           scope = $rootScope.$new();
           compile = $compile;
+          interval = $interval;
         });
 
         $element = angular.element('<slider-element>'
@@ -152,22 +155,43 @@ describe('Slider App Unit Test', () => {
           .toBe(numOfItems.length);
       });
 
-      // it('should enable and disable autoplay on checkbox click', () => {
-      //   const controller = $element.controller('slider-element');
-      //   const autoplayCheckbox = $element[0].querySelector('#autoplay-checkbox');
-      //
-      //   expect(angular.element(autoplayCheckbox).hasClass('ng-empty')).toBe(true);
-      //   expect(controller.onAutoplay).toBe(false);
-      //   autoplayCheckbox.click();
-      //   scope.$digest();
-      //   console.log(angular.element(autoplayCheckbox).clas);
-      //   //expect(angular.element(autoplayCheckbox).hasClass('ng-not-empty')).toBe(true);
-      //   //expect(controller.onAutoplay).toBe(true);
-      //   autoplayCheckbox.click();
-      //   scope.$digest();
-      //   expect(angular.element(autoplayCheckbox).hasClass('ng-empty')).toBe(true);
-      //   //expect(controller.onAutoplay).toBe(false);
-      // });
+      it('should enable and disable autoplay on checkbox click', () => {
+        const controller = $element.controller('slider-element');
+        const autoplayCheckbox = $element[0].querySelector('#autoplay-checkbox');
+
+        expect(angular.element(autoplayCheckbox).hasClass('ng-empty')).toBe(true);
+        expect(controller.onAutoplay).toBe(false);
+        autoplayCheckbox.click();
+        angular.element(autoplayCheckbox).triggerHandler('change');
+        controller.$interval.flush(500);
+        scope.$digest();
+        expect(angular.element(autoplayCheckbox).hasClass('ng-empty')).toBe(false);
+        expect(controller.onAutoplay).toBe(true);
+        autoplayCheckbox.click();
+        angular.element(autoplayCheckbox).triggerHandler('change');
+        scope.$digest();
+
+        expect(angular.element(autoplayCheckbox).hasClass('ng-empty')).toBe(true);
+        expect(controller.onAutoplay).toBe(false);
+      });
+
+      it('should enable and disable autoplay, based on onAutoplay variable', () => {
+        const controller = $element.controller('slider-element');
+
+        expect(controller.items[0].visible).toBe(true);
+        expect(controller.items[1].visible).toBe(false);
+        expect(controller.items[2].visible).toBe(false);
+
+        controller.onAutoplay = true;
+        controller.toggleAutoplay();
+        controller.$interval.flush(500);
+        controller.onAutoplay = false;
+        controller.toggleAutoplay();
+
+        expect(controller.items[0].visible).toBe(false);
+        expect(controller.items[1].visible).toBe(true);
+        expect(controller.items[2].visible).toBe(false);
+      });
     });
   });
 });
