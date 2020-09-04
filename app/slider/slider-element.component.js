@@ -56,5 +56,7 @@ export default {
       }
       this.items[this.currentIndex].visible = true;
     }
+
+
   },
 };
