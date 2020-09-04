@@ -42,7 +42,6 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "author": "Deniz Mert Tecimer",
