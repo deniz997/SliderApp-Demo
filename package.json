@@ -22,6 +22,7 @@
     "type": "git",
     "url": "https://gitlab.piworks.net/deniz.tecimer/slider-demo.git"
   },
+  "private": false,
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
