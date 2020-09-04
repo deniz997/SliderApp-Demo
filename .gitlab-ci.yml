@@ -5,6 +5,7 @@ stages:
   - build
   - test
   - e2e
+  - deploy
 
 Build:
   stage: build
@@ -27,3 +28,17 @@ E2e:
   script:
     - npm install
     - npm run protractor
+
+Deploy:
+  stage: deploy
+  image: node
+  script:
+    - npm install @semantic-release/gitlab
+    - npm install @semantic-release/git
+    - npx semantic-release
+  except:
+    - tags
+  only:
+    - master
+  tags:
+    - docker-linux-runner
