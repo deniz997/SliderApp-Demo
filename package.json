@@ -1,5 +1,5 @@
 {
-  "name": "slider-demo",
+  "name": "@deniz/slider-demo",
   "version": "1.0.0",
   "main": "app.js",
   "files": [
@@ -40,7 +40,10 @@
       "master"
     ]
   },
-  "author": "",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "Deniz Mert Tecimer",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",

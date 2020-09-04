@@ -56,5 +56,9 @@ export default {
       }
       this.items[this.currentIndex].visible = true;
     }
+
+    emptyFeature() {
+      return this.currentIndex;
+    }
   },
 };
