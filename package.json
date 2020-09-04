@@ -18,6 +18,10 @@
     "start-webdriver": "webdriver-manager start",
     "preprotractor": "npm run update-webdriver"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.piworks.net/deniz.tecimer/slider-demo.git"
+  },
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
