@@ -7,8 +7,8 @@ import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
 
-const sliderModule = angular.module('sliderElement', [])
+const slider = angular.module('sliderElement', [])
   .component('sliderElement', sliderElementComponent)
   .component('slideItem', slideItemComponent);
 
-export default sliderModule;
+export default slider.name;
