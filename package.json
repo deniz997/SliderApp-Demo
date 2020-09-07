@@ -1,7 +1,7 @@
 {
   "name": "@deniz.tecimer/slider-app",
   "version": "1.4.2",
-  "main": "app.js",
+  "main": "./app/app.js",
   "files": [
     "/dist/bundle.js",
     "/app/slider"
