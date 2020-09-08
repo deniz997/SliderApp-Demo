@@ -1,6 +1,6 @@
 {
   "name": "@deniz.tecimer/slider-app",
-  "version": "1.4.4",
+  "version": "1.4.6",
   "main": "app/app.js",
   "files": [
     "/dist/bundle.js",
@@ -105,4 +105,3 @@
     }
   }
 }
-
