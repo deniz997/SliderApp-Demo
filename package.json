@@ -9,7 +9,7 @@
   "scripts": {
     "test": "karma start --browsers ChromeHeadless --autoWatch false --singleRun true",
     "start": "http-server -a localhost -p 8000 -c-1 app",
-    "build": "webpack --mode development",
+    "build": "webpack --mode production",
     "test:single-run": "npm test -- --single-run",
     "serve": "webpack-dev-server",
     "protractor": "protractor e2e-tests/protractor.conf.js",
