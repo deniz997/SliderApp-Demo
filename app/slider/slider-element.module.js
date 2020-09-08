@@ -10,3 +10,5 @@ import '@fortawesome/fontawesome-free/js/brands';
 angular.module('sliderElement', [])
   .component('sliderElement', sliderElementComponent)
   .component('slideItem', slideItemComponent);
+
+export default angular.module('sliderElement').name;
