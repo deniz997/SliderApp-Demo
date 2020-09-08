@@ -1,4 +1,4 @@
-#Slider App Module
+# Slider App Module
 This module is developed with AngularJS 1.8, which provides slide deck with autoplay function.
 
 ## Functions
@@ -44,4 +44,4 @@ angular.module('appModule',[slider]);
 
 ### How it looks
 
-![alt text][app/images/example-image.jpg]
+![alt text](app/images/example-image.jpg)
