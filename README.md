@@ -2,8 +2,11 @@
 This module is developed with AngularJS 1.8, which provides slide deck with autoplay function.
 
 ## Functions
+
 >Navigation
+
 >Autoplay with 500ms
+
 >Generic content
 
 ## Installation
