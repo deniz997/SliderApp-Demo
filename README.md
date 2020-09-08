@@ -44,4 +44,4 @@ angular.module('appModule',[slider]);
 
 ### How it looks
 
-![alt text][images/example-image.jpg]
+![alt text][app/images/example-image.jpg]
